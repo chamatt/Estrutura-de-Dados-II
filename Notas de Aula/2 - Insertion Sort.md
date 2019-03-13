@@ -35,3 +35,11 @@ insertSort(list);
 console.log("Lista Ordenada", list);
 // Lista Ordenada: [1, 2, 3, 5, 6, 9, 10]
 ```
+
+O que devemos utilizar para medir o tempo de execução dos algorítmos? Comparações e atribuições.
+
+### Quantas comparações o Insertion Sort faz para n elementos no melhor caso? **n-1**
+
+### Quantas comparações o Insertion Sort faz para n elementos no melhor caso? **Σ <sup>(n)</sup> <sub>(i = 2)</sub> i - 1**
+
+### Quantas comparações o Insertion Sort faz para n elementos no caso médio? **Fica para a próxima aula**
