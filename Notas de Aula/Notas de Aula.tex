@@ -3,7 +3,7 @@
 \usepackage{listings}
 \usepackage{natbib}
 \usepackage{graphicx}
- 
+% \usepackage[bottom=2cm,top=3cm,left=3cm,right=2cm]{geometry}
 
 \begin{document}
 
@@ -141,9 +141,9 @@ n - 1
 \text{Quando $n = 2$, teremos duas situações:}
 \begin{enumerate}
 \item {Menor na segunda posição (Probabilidade: $\frac{1}{2}$)\\}
-    \em{Vai comparar com a primeira posição, trocar e parar}
+    \em{Vai comparar com a primeira posição, trocar e parar\\}
 \item {Maior na segunda posição (Probabilidade: $\frac{1}{2}$)\\}
-    \em{Vai comparar com a primeira posição e parar}
+    \em{Vai comparar com a primeira posição e parar\\}
 \end{enumerate}
 
 
@@ -185,7 +185,7 @@ I_n = I_{n-1} + \frac{n-1}{n} + \sum_{k = 1}^{n-1} \frac{k}{n}
     I_n = I_{n-1} + \frac{n^2 + n - 2}{2n} 
 \end{equation}
 
-\textbf{Agora podemos finalmente responder a pergunta deste tópico, Quantas comparações o Insertion Sort faz para n elementos no caso médio?}
+\text{Agora podemos finalmente responder a pergunta deste tópico, quantas comparações o Insertion Sort faz para n elementos no caso médio?}
 
 \begin{equation}
     I_n = \sum_{k = 2}^{n} \frac{k^2 + k - 2}{2k} 
