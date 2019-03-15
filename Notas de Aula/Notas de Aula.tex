@@ -1,0 +1,197 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{natbib}
+\usepackage{graphicx}
+ 
+
+\begin{document}
+
+\title{Estrutura de Dados II}
+\author{Matheus Vicente Delunardo de Lucena\\
+\and
+Baseado nas aula de Berilhes Borges Garcia}
+\date{}
+
+
+
+\maketitle
+
+
+
+
+%%%%%%%%% INTRODUÇÃO %%%%%%%%%
+
+\section{Introdução}
+
+\begin{itemize}
+\item \textbf{O que aprenderemos neste curso?} \textnormal{Algoritmos.} 
+\item \textbf{Que tipo de algoritmos?} \textnormal{Algoritmos de todos os tipos, mas principalmente de ordenação e pesquisa} 
+\end{itemize}
+
+\textnormal{Algorimos são o espírito da Computação. Computadores podem ser feitos de muitas coisas diferentes. Atualmente eles sao feitos de silício, mas no futuro talve seja feitos de ácido desoxiribonucleico, ou quem sabe, balas de M\&M. De qualquer forma o espírito permanecerá inalterado. E é esse espírito que nós chamamos de algoritmo.}
+
+\textnormal{Neste curso veremos vários algorítmos, mas nós tamém veremos que existem um conjunto, na verdade um conjunto muito pequeno, de estratégias para construção de algorítmos. E o nosso foco, em grande parte, será em aprender essas técnicas.}
+
+
+\begin{itemize}
+\item \textbf{Dividir e Conquistar}
+\item \textbf{Programação Dinâmica}
+\item \textbf{Abordagem Gulosa}
+\item \textbf{Transforme e Conquiste}
+\item \textbf{Randomização}
+
+\end {itemize}
+
+
+%%%%%%%%% BIBLIOGRAFIA %%%%%%%%%
+
+\section{Bibliografia}
+
+
+\subsection{Livro Texto}
+
+
+\begin{itemize}
+\item \textnormal{"Algoritmos", Cormen, Leisesson, Rivest & Stein}
+
+\end{itemize}
+
+\subsection{Referências adicionais}
+
+\begin{itemize}
+\item \textnormal{"The Art of Computer Programming", D.E. Knuth, Vol. 3}
+\item \textnormal{"Algorithms", R. Sedgewick (Possui versões em pseudocódigo, C, Pascal e Java)}
+\end{itemize}
+
+
+
+
+
+%%%%%%%%% INSERTION SORT %%%%%%%%%
+\section{Insertion Sort}
+
+\subsection{Pseudocódigo}
+\begin{lstlisting}
+    InsertionSort(array, n)
+    for i <-- 2 to n
+        aux <-- array[i]
+        j <-- i - 1
+        while(j < 0 and array[j] > aux) do
+            array[j + 1] <-- array[j]
+            j <-- j - 1
+        array[j +  1] <-- aux
+\end{lstlisting}
+
+\subsection{Javascript}
+
+\begin{lstlisting}
+    function insertSort(array) {
+        const n = array.length;
+        for (let i = 1; i < n; i++) {
+            let aux = array[i];
+            let j = i - 1;
+            while (j >= 0 && array[j] > aux) {
+                array[j + 1] = array[j];
+                j = j - 1;
+            }
+            array[j + 1] = aux;
+        }
+    }
+    const list = [10, 3, 5, 1, 2, 9, 6];
+    insertSort(list);
+    console.log("Lista Ordenada", list);
+    // Lista Ordenada: [1, 2, 3, 5, 6, 9, 10]
+
+\end{lstlisting}
+
+\subsection{Análise}
+\textnormal{O que devemos utilizar para medir o tempo de execução dos algorítmos? Comparações e atribuições.}
+
+\textbf{Quantas comparações o Insertion Sort faz para n elementos no melhor caso?}
+\begin{equation}
+n - 1
+\end{equation}
+
+\textbf{Quantas comparações o Insertion Sort faz para n elementos no melhor caso?} 
+\begin{equation}
+    \sum_{i=2}^{n} i-1
+\end{equation}
+
+\textbf{Quantas comparações o Insertion Sort faz para n elementos no caso médio?}
+
+\textnormal{Essa já é uma pergunta mais complicada, e para repondê-la, precisamos analisar a distribuição dos valores da entrada. Nosso modelo de probabilidade assumirá que todas as entradas são igualmente prováveis, ou seja, tem $1/n$ chances de ocorrer.}
+
+\textnormal{Definimos que:\\}
+\indent  \text{$I_n$ = O número médio de comparações que o Insertion Sort faz para ordenar um vetor aleatório de n elementos.}
+
+\text{Com isso, podemos começar a analisar cada caso.}
+
+\subsubsection{Vetor com 0 elementos}
+\text{Quanto $n = 0$, ele não fará nenhuma comparação, logo: \\}
+\indent \text{$I_0 = 0$}
+
+
+\subsubsection{Vetor com 1 elemento}
+\text{Quando $n = 1$, como só há um elemento, ele não fará nenhuma comparação, logo: \\}
+\indent \text{$I_1 = I_0 + 0$}
+
+
+\subsubsection{Vetor com 2 elementos}
+\text{Quando $n = 2$, teremos duas situações:}
+\begin{enumerate}
+\item {Menor na segunda posição (Probabilidade: $\frac{1}{2}$)\\}
+    \em{Vai comparar com a primeira posição, trocar e parar}
+\item {Maior na segunda posição (Probabilidade: $\frac{1}{2}$)\\}
+    \em{Vai comparar com a primeira posição e parar}
+\end{enumerate}
+
+
+\text{$I_2 = I_1 + \frac{1}{2} \cdot 1 + \frac{1}{2} \cdot 1 $}
+
+\subsubsection{Vetor com 3 elementos}
+\text{Quando $n = 2$, teremos três situações:}
+\begin{enumerate}
+\item {Menor na terceira posição (Probabilidade: $\frac{1}{3}$)\\}
+    \em{Vai comparar com a segunda posição, trocar, comparar com a primeira, trocar e parar\\}
+\item {Segundo menor na terceira posição (Probabilidade: $\frac{1}{3}$)\\}
+    \em{Vai comparar com a segunda posição, trocar, comparar com a primeira, e parar\\}
+\item {Maior na terceira posição (Probabilidade: $\frac{1}{3}$)\\}
+    \em{Vai comparar com a segunda posição e parar\\}
+\end{enumerate}
+
+
+\text{$I_3 = I_2 + \frac{1}{3} \cdot 2 + \frac{1}{3} \cdot 2 + \frac{1}{3} \cdot 1 $}
+
+\text{Já é possivel identificar um padrão nesses resultados de $I_n$, então podemos expressá-lo como:}
+
+\begin{equation}
+I_n = I_{n-1} + \frac{n-1}{n} + \sum_{k = 1}^{n-1} \frac{k}{n} 
+\end{equation}
+
+\begin{equation}
+    I_n = I_{n-1} + \frac{n-1}{n} + \frac{1}{n}\sum_{k = 1}^{n-1} k
+\end{equation}
+
+\begin{equation}
+    I_n = I_{n-1} + \frac{n-1}{n} + \frac{1}{n} \cdot \frac{n(n-1)}{2}
+\end{equation}
+
+\begin{equation}
+    I_n = I_{n-1} + \frac{n-1}{n} + \frac{1}{n} \cdot \frac{n(n-1)}{2}
+\end{equation}
+
+\begin{equation}
+    I_n = I_{n-1} + \frac{n^2 + n - 2}{2n} 
+\end{equation}
+
+\textbf{Agora podemos finalmente responder a pergunta deste tópico, Quantas comparações o Insertion Sort faz para n elementos no caso médio?}
+
+\begin{equation}
+    I_n = \sum_{k = 2}^{n} \frac{k^2 + k - 2}{2k} 
+\end{equation}
+
+\text{Este algoritmo, portanto, tem complexidade média quadratica}
+
+
+\end{document}
