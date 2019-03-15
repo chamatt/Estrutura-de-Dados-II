@@ -7,7 +7,7 @@ InsertionSort(array, n)
     for i <-- 2 to n
         aux <-- array[i]
         j <-- i - 1
-        while(j < 0 and array[j] > aux) do
+        while(j > 0 and array[j] > aux) do
             array[j + 1] <-- array[j]
             j <-- j - 1
         array[j +  1] <-- aux
